@@ -8,12 +8,6 @@ import Card from '../../components/List/Card';
 
 const Home = ({ setCountries, countries }) => {
   const [filteredCountries, setFilteredCountries] = useState(countries);
-  useEffect(() => {
-    if (!countries.length) {
-      axios.get(ALL).then(({ data }) => setCountries(data));
-    }
-    //eslint-disable-next-line
-  }, []);
 
   const handleSearch = (search, region) => {
     let data = [...countries];
@@ -29,6 +23,15 @@ const Home = ({ setCountries, countries }) => {
     setFilteredCountries(data);
   };
 
+  useEffect(() => {
+    if (!countries.length) axios.get(ALL).then(({ data }) => setCountries(data));
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    handleSearch();
+    // eslint-disable-next-line
+  }, [countries]);
   return (
     <>
       <Controls onSearch={handleSearch} />

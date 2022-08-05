@@ -8,11 +8,12 @@ import Layout from './components/Layout/Layout';
 
 function App() {
   const [countries, setCountries] = useState([]);
+
   return (
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home setCountries={setCountries} countries={countries} />} />
+          <Route index element={<Home countries={countries} setCountries={setCountries} />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/country/:name" element={<Detalies />} />
         </Route>
